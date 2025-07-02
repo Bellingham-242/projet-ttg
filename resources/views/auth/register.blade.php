@@ -124,6 +124,7 @@
                     <option value="etudiant">Étudiant</option>
                     <option value="formateur">Formateur</option>
                     <option value="parent">Parent</option>
+                    <option value="admin">Administrateur</option>
                 </select>
             </div>
 
