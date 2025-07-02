@@ -11,58 +11,76 @@
 
     <style>
         body {
-            background: linear-gradient(to right, #eef2f3, #ffffff);
+            margin: 0;
+            padding: 0;
+            color: #222;
+            font-family: 'Segoe UI', sans-serif;
+            animation: gradient 20s ease infinite;
+            background: linear-gradient(270deg, #dbeafe, #fce7f3, #fef9c3, #e0f2fe);
+            background-size: 800% 800%;
+        }
+
+        @keyframes gradient {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
         }
 
         .navbar {
-            background: linear-gradient(90deg, #0d6efd, #6610f2);
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(8px);
         }
 
         .navbar .nav-link {
-            color: #ffffff !important;
+            color: #fff !important;
             font-weight: 500;
+            transition: color 0.3s;
         }
 
         .navbar .nav-link:hover {
-            color: #ffd700 !important;
-            text-shadow: 0 0 2px #fff;
+            color: #facc15 !important;
+            text-shadow: 0 0 5px #fff;
         }
 
         .navbar-brand {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: #fff !important;
+            color: #fef08a !important;
         }
 
-        .container main {
-            background-color: #ffffff;
-            border-radius: 10px;
+        main.container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
             padding: 2rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .alert {
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 0.95rem;
         }
 
         footer {
-            background: #f1f3f5;
-            border-top: 1px solid #dee2e6;
+            background: rgba(15, 23, 42, 0.9);
+            color: #cbd5e1;
             padding: 1rem;
             font-size: 0.85rem;
-            color: #6c757d;
+            text-align: center;
         }
 
         .btn-link {
-            color: #fff !important;
-            padding: 0;
+            color: #f8fafc !important;
             margin-left: 1rem;
         }
 
         .btn-link:hover {
-            color: #ffc107 !important;
-            text-decoration: none;
+            color: #facc15 !important;
         }
     </style>
 </head>
@@ -75,8 +93,7 @@
             <i class="bi bi-mortarboard"></i> T.T.G Network
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Menu">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -116,7 +133,7 @@
     </div>
 </nav>
 
-<!-- Main content -->
+<!-- Main Content -->
 <main class="container my-5">
     @if(session('success'))
         <div class="alert alert-success shadow-sm"><i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}</div>
@@ -130,7 +147,7 @@
 </main>
 
 <!-- Footer -->
-<footer class="text-center small">
+<footer>
     &copy; {{ date('Y') }} T.T.G Network. Tous droits réservés.
 </footer>
 
