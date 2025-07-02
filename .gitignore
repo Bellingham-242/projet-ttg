@@ -1,3 +1,14 @@
+/vendor
+/node_modules
+/public/storage
+/public/hot
+/public/build
+.env
+.env.*.php
+Homestead.yaml
+Homestead.json
+.phpunit.result.cache
+/storage/*.key
 /storage/app/public
 /storage/framework/cache/*
 /storage/framework/sessions/*
