@@ -4,51 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bienvenue - T.T.G Network</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
-    /* Animation du fond */
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: 'Poppins', sans-serif;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      background: linear-gradient(135deg, #1e3a8a, #7e22ce, #db2777, #1e3a8a);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
-      color: #f1f5f9;
-    }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #fefae0;
     }
 
     header, footer {
-      padding: 20px;
+      width: 100%;
       max-width: 1200px;
       margin: auto;
-      width: 100%;
+      padding: 20px;
     }
 
     header h1 {
       font-size: 2rem;
       font-weight: 800;
-      color: #fcd34d;
+      color: #fef3c7;
+    }
+
+    nav {
+      margin-top: 10px;
     }
 
     nav a {
-      margin-left: 20px;
+      margin-right: 20px;
       text-decoration: none;
-      color: #e0f2fe;
+      color: #fcd34d;
       font-weight: 600;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
 
     nav a:hover {
-      color: #38bdf8;
+      color: #fde68a;
     }
 
     main {
@@ -57,48 +56,51 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 40px 20px;
       text-align: center;
-      padding: 0 20px;
     }
 
     h2 {
-      font-size: 2.8rem;
-      font-weight: 800;
+      font-size: 2.5rem;
       margin-bottom: 15px;
-      text-shadow: 2px 2px #00000033;
+      font-weight: bold;
+      color: #e2e8f0;
+      text-shadow: 2px 2px #00000022;
     }
 
     p {
-      font-size: 1.2rem;
       max-width: 600px;
-      color: #cbd5e1;
       margin-bottom: 30px;
+      font-size: 1.1rem;
+      color: #cbd5e1;
     }
 
     .btn {
-      padding: 12px 28px;
-      margin: 0 10px;
+      padding: 12px 24px;
+      margin: 8px;
       font-weight: bold;
-      border-radius: 10px;
+      border-radius: 8px;
       border: none;
-      background-color: #1e40af;
-      color: white;
-      box-shadow: 0 0 10px #1e40af33;
+      background-color: #1e3a8a;
+      color: #fff;
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
       text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
     .btn:hover {
-      background-color: #2563eb;
-      transform: scale(1.05);
+      background-color: #3b82f6;
+      transform: translateY(-2px);
     }
 
     footer {
-      background-color: rgba(30, 41, 59, 0.85);
+      background-color: #1e293b;
       text-align: center;
       font-size: 0.9rem;
       color: #94a3b8;
+      padding: 15px 10px;
     }
 
     [data-fade] {
@@ -110,6 +112,32 @@
     [data-fade].show {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header, footer {
+        padding: 15px;
+        text-align: center;
+      }
+
+      nav a {
+        display: block;
+        margin: 10px 0;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 280px;
+      }
     }
   </style>
 </head>

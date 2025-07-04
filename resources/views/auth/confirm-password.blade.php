@@ -1,84 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Confirm Password</title>
+    <title>Confirmation du mot de passe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-light: #fefae0;
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --danger: #dc2626;
+            --text: #1e293b;
+            --gray: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #f9fafb;
+            margin: 0;
+            padding: 1rem;
+            min-height: 100vh;
+            background-color: var(--bg-dark);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
         }
+
         .container {
-            background-color: white;
+            background-color: var(--card-light);
             padding: 2rem;
             border-radius: 1rem;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
+
         .info-text {
             margin-bottom: 1rem;
             font-size: 0.95rem;
-            color: #4b5563;
+            color: var(--gray);
+            line-height: 1.4;
         }
+
         label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: #374151;
+            color: var(--text);
         }
+
         input[type="password"] {
             width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.375rem;
+            padding: 0.65rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--primary);
             outline: none;
-            transition: border 0.3s ease;
         }
-        input[type="password"]:focus {
-            border-color: #3b82f6;
-        }
+
         .error {
-            margin-top: 0.5rem;
-            color: #dc2626;
+            margin-top: 0.4rem;
+            color: var(--danger);
             font-size: 0.875rem;
         }
+
         .btn-container {
+            margin-top: 1.75rem;
             display: flex;
             justify-content: flex-end;
-            margin-top: 1.5rem;
         }
+
         button {
-            background-color: #3b82f6;
+            background-color: var(--primary);
             color: white;
-            padding: 0.5rem 1rem;
             border: none;
-            border-radius: 0.375rem;
-            cursor: pointer;
+            border-radius: 0.5rem;
+            padding: 0.6rem 1.5rem;
             font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
             transition: background 0.3s ease;
         }
+
         button:hover {
-            background-color: #2563eb;
+            background-color: var(--primary-dark);
+        }
+
+        @media (max-width: 480px) {
+            .btn-container {
+                justify-content: center;
+            }
+
+            button {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="info-text">
-            This is a secure area of the application. Please confirm your password before continuing.
+            Ceci est une zone sécurisée de l'application. Veuillez confirmer votre mot de passe pour continuer.
         </div>
 
         <form method="POST" action="{{ route('password.confirm') }}">
             @csrf
 
             <div>
-                <label for="password">Password</label>
+                <label for="password">Mot de passe</label>
                 <input id="password" type="password" name="password" required autocomplete="current-password">
                 @if ($errors->has('password'))
                     <div class="error">{{ $errors->first('password') }}</div>
@@ -86,7 +125,7 @@
             </div>
 
             <div class="btn-container">
-                <button type="submit">Confirm</button>
+                <button type="submit">Confirmer</button>
             </div>
         </form>
     </div>

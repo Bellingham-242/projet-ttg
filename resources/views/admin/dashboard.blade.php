@@ -1,160 +1,178 @@
-{{-- resources/views/dashboard.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
 <style>
-    /* Container general */
-    .container.py-4 {
-        max-width: 1100px;
-        margin: auto;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #222;
+    :root {
+        --bleu-nuit: #0f172a;
+        --bleu-clair: #1e40af;
+        --beige: #fefae0;
+        --beige-fonce: #bfae8e;
+        --accent: #38bdf8;
+        --ombre: rgba(0, 0, 0, 0.2);
     }
 
-    /* Alert bienvenue */
+    body {
+        background-color: var(--bleu-nuit);
+    }
+
+    .container.py-4 {
+        max-width: 1140px;
+        margin: auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--beige);
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
     .alert-success {
         background: linear-gradient(135deg, #4ade80, #16a34a);
-        border: none;
-        color: #fff;
-        font-size: 1.25rem;
+        color: white;
+        font-size: 1.2rem;
         font-weight: 600;
+        border: none;
         border-radius: 10px;
         box-shadow: 0 4px 12px rgba(22, 163, 74, 0.5);
         text-align: center;
         margin-bottom: 2rem;
-        user-select: none;
-        transition: background 0.4s ease;
-    }
-    .alert-success strong {
-        text-transform: uppercase;
-        letter-spacing: 1px;
     }
 
-    /* Titres */
     h3.mb-4 {
         font-size: 2rem;
-        font-weight: 900;
-        color: #3b82f6;
-        text-shadow: 1px 1px 3px #93c5fd88;
-        margin-bottom: 2.5rem !important;
+        font-weight: 800;
+        color: #fcd34d;
+        text-shadow: 1px 1px 3px rgba(255,255,255,0.1);
     }
 
-    /* Lien boutons dans row */
-    .row > .col-md-4.mb-3, 
+    .row > .col-md-4.mb-3,
     .row > .col-md-6.mb-3 {
-        padding-left: 8px;
-        padding-right: 8px;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
     }
 
-    /* Boutons principaux */
     a.btn-primary, a.btn-success, a.btn-warning {
         font-weight: 700;
-        font-size: 1.1rem;
-        border-radius: 12px;
-        padding: 15px 0;
-        box-shadow: 0 6px 12px rgb(0 0 0 / 0.15);
-        transition: all 0.3s ease;
-        letter-spacing: 0.05em;
         text-transform: uppercase;
+        font-size: 1.05rem;
+        border-radius: 12px;
+        padding: 12px 0;
+        display: inline-block;
+        width: 100%;
+        color: #fff;
+        box-shadow: 0 4px 10px var(--ombre);
+        transition: all 0.3s ease;
+        text-align: center;
         user-select: none;
     }
 
     a.btn-primary {
-        background: linear-gradient(45deg, #2563eb, #4f46e5);
-        border: none;
-        color: #f9fafb;
+        background: linear-gradient(45deg, var(--bleu-clair), #2563eb);
     }
     a.btn-primary:hover {
-        background: linear-gradient(45deg, #3b82f6, #6366f1);
-        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.6);
+        background: linear-gradient(45deg, #3b82f6, #60a5fa);
+        box-shadow: 0 6px 16px rgba(59, 130, 246, 0.5);
+        color: #fff;
     }
 
     a.btn-success {
         background: linear-gradient(45deg, #16a34a, #22c55e);
-        border: none;
-        color: #ecfccb;
+        color: #f0fdf4;
     }
     a.btn-success:hover {
         background: linear-gradient(45deg, #22c55e, #4ade80);
-        box-shadow: 0 8px 20px rgba(34, 197, 94, 0.6);
+        box-shadow: 0 6px 16px rgba(34, 197, 94, 0.5);
     }
 
     a.btn-warning {
         background: linear-gradient(45deg, #d97706, #facc15);
-        border: none;
-        color: #423c0f;
+        color: #1c1917;
     }
     a.btn-warning:hover {
-        background: linear-gradient(45deg, #facc15, #fde68a);
-        box-shadow: 0 8px 20px rgba(250, 204, 21, 0.6);
+        background: linear-gradient(45deg, #fde68a, #facc15);
+        box-shadow: 0 6px 16px rgba(252, 201, 21, 0.5);
     }
 
-    /* Cartes info formateur */
     .card.bg-info {
+        background: linear-gradient(135deg, #0ea5e9, #0284c7);
         border-radius: 16px;
-        box-shadow: 0 10px 25px rgb(14 165 233 / 0.3);
+        box-shadow: 0 6px 20px rgba(14, 165, 233, 0.3);
+        color: #f1f5f9;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         cursor: pointer;
-        user-select: none;
-        color: #f0f9ff;
-        background: linear-gradient(135deg, #0ea5e9, #0284c7);
     }
     .card.bg-info:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgb(14 165 233 / 0.6);
+        transform: translateY(-6px);
+        box-shadow: 0 10px 30px rgba(14, 165, 233, 0.5);
     }
+
     .card .card-title {
         font-weight: 700;
-        font-size: 1.3rem;
-        margin-bottom: 0.7rem;
-        text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+        font-size: 1.2rem;
     }
+
     .card .card-text {
         font-size: 0.95rem;
-        line-height: 1.3;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-        min-height: 60px;
+        color: #f8fafccc;
+        opacity: 0.95;
+        min-height: 3.2rem;
     }
-    .card .btn-light {
+
+    .btn-light {
         font-weight: 600;
         border-radius: 30px;
         padding: 8px 20px;
-        box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
-        transition: background-color 0.3s ease;
+        background: var(--beige);
+        color: var(--bleu-nuit);
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.12);
     }
-    .card .btn-light:hover {
-        background-color: #cbe7ff;
+
+    .btn-light:hover {
+        background: #f9f7e8;
+        color: var(--bleu-clair);
         box-shadow: 0 6px 18px rgba(0, 123, 255, 0.4);
     }
 
-    /* Texte petits rôles */
     p.text-muted {
-        font-size: 1rem;
+        color: #cbd5e1 !important;
         font-style: italic;
-        color: #555 !important;
-        margin-top: 1rem;
     }
 
     p.text-danger {
-        font-weight: 700;
-        font-size: 1.1rem;
+        color: #f87171 !important;
+        font-weight: bold;
         text-align: center;
-        margin-top: 2rem;
-        color: #dc2626 !important;
-        user-select: none;
     }
 
-    /* Info formateur & étudiant code/matricule */
     p strong {
-        color: #2563eb;
-        font-weight: 700;
+        color: var(--accent);
         text-transform: uppercase;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.07em;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        h3.mb-4 {
+            font-size: 1.6rem;
+        }
+
+        .btn {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .row > div[class*="col-"] {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .card .card-text {
+            min-height: auto;
+        }
     }
 </style>
 
 <div class="container py-4">
-    <div class="alert alert-success">
+    <div class="alert alert-success" role="alert">
         Bonjour <strong>{{ Auth::user()->name }}</strong> !
     </div>
 

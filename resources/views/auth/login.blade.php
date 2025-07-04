@@ -1,116 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Log in</title>
+    <title>Connexion - T.T.G Network</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <style>
-        /* =====  Base layout  ===== */
-        * { box-sizing: border-box; }
+        :root {
+            --bg: #0f172a;
+            --panel: #fefae0;
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --danger: #dc2626;
+            --success-bg: #dcfce7;
+            --success-text: #15803d;
+            --text-dark: #1f2937;
+            --gray: #6b7280;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            height: 100vh;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #f3f4f6;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
         }
+
         .container {
+            background: var(--panel);
+            padding: 2.5rem 2rem;
+            border-radius: 1.5rem;
             width: 100%;
             max-width: 420px;
-            background: #ffffff;
-            padding: 2.25rem 2rem;
-            border-radius: 1.25rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
         }
 
-        /* =====  Typography  ===== */
         label {
-            display: block;
-            margin-bottom: 0.45rem;
             font-weight: 600;
-            color: #374151;
+            font-size: 0.95rem;
+            margin-bottom: 0.35rem;
+            display: block;
+            color: var(--text-dark);
         }
-        .info, .error, .status {
-            font-size: 0.875rem;
-        }
-        .status {
-            margin-bottom: 1rem;
-            color: #16a34a;
-            background: #dcfce7;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-        }
-        .error {
-            margin-top: 0.4rem;
-            color: #dc2626;
-        }
-        a.link {
-            font-size: 0.875rem;
-            color: #2563eb;
-            text-decoration: underline;
-            transition: color 0.25s ease;
-        }
-        a.link:hover { color: #1d4ed8; }
 
-        /* =====  Inputs  ===== */
         input[type="email"],
         input[type="password"] {
             width: 100%;
-            padding: 0.55rem 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.45rem;
+            padding: 0.6rem 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid #cbd5e1;
             font-size: 0.95rem;
-            transition: border-color 0.25s ease;
-        }
-        input:focus {
-            outline: none;
-            border-color: #3b82f6;
+            transition: border 0.3s ease;
         }
 
-        /* =====  Checkbox  ===== */
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
         .checkbox-row {
             margin-top: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
+
         .checkbox-row input {
-            width: 1rem;
-            height: 1rem;
-            accent-color: #4f46e5;
-        }
-        .checkbox-row span {
-            color: #4b5563;
-            font-size: 0.875rem;
+            accent-color: var(--primary-dark);
         }
 
-        /* =====  Actions  ===== */
+        .checkbox-row span {
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+
+        .status {
+            margin-bottom: 1rem;
+            background-color: var(--success-bg);
+            color: var(--success-text);
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .error {
+            margin-top: 0.35rem;
+            color: var(--danger);
+            font-size: 0.85rem;
+        }
+
         .actions {
-            margin-top: 1.75rem;
+            margin-top: 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 0.8rem;
         }
+
         button {
-            background: #3b82f6;
-            color: #ffffff;
-            border: none;
-            border-radius: 0.45rem;
-            padding: 0.55rem 1.25rem;
-            font-weight: 600;
+            background-color: var(--primary);
+            color: #fff;
+            padding: 0.6rem 1.5rem;
+            font-weight: bold;
             font-size: 0.95rem;
+            border: none;
+            border-radius: 0.5rem;
             cursor: pointer;
-            transition: background 0.25s ease;
+            transition: background 0.3s ease;
         }
-        button:hover { background: #2563eb; }
+
+        button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        a.link {
+            color: var(--primary);
+            font-size: 0.85rem;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        a.link:hover {
+            color: var(--primary-dark);
+        }
+
+        @media (max-width: 480px) {
+            .actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .actions a,
+            .actions button {
+                width: 100%;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Session Status -->
+        {{-- Session Status --}}
         @if (session('status'))
             <div class="status">{{ session('status') }}</div>
         @endif
@@ -118,37 +158,39 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
-            <!-- Email Address -->
+            {{-- Email Address --}}
             <div>
-                <label for="email">Email</label>
+                <label for="email">Adresse Email</label>
                 <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username">
                 @if ($errors->get('email'))
                     <div class="error">{{ $errors->first('email') }}</div>
                 @endif
             </div>
 
-            <!-- Password -->
+            {{-- Password --}}
             <div style="margin-top: 1.25rem;">
-                <label for="password">Password</label>
+                <label for="password">Mot de passe</label>
                 <input id="password" type="password" name="password" required autocomplete="current-password">
                 @if ($errors->get('password'))
                     <div class="error">{{ $errors->first('password') }}</div>
                 @endif
             </div>
 
-            <!-- Remember Me -->
+            {{-- Remember Me --}}
             <div class="checkbox-row">
                 <input id="remember_me" type="checkbox" name="remember">
-                <span>Remember me</span>
+                <span>Se souvenir de moi</span>
             </div>
 
-            <!-- Actions -->
+            {{-- Actions --}}
             <div class="actions">
                 @if (Route::has('password.request'))
-                    <a class="link" href="{{ route('password.request') }}">Forgot your password?</a>
+                    <a class="link" href="{{ route('password.request') }}">
+                        Mot de passe oublié ?
+                    </a>
                 @endif
 
-                <button type="submit">Log in</button>
+                <button type="submit">Connexion</button>
             </div>
         </form>
     </div>
